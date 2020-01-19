@@ -9,7 +9,7 @@ rm /opt/provisioners/scapy/provision.sh
 mkdir -p /opt/scapy
 mv /tmp/master.zip /opt/scapy
 cd /opt/scapy
-unzip -of master.zip
+unzip -o master.zip
 
 cd scapy-master
 sudo python3 setup.py install
