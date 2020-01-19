@@ -146,11 +146,17 @@ def handleWorkList(worklist):
         return installedOne
 
 def localCommand(command):
-        proc = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=True)
-        out,err = proc.communicate() # TODO: Timeout?
-        ret = out.decode('utf-8')
-        print("Stderr: "+err.decode('utf-8'))
-        return ret
+        proc = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, shell=True, encoding='utf8', bufsize=1)
+        fullout = ""
+        while proc.poll() is None:
+            line = proc.stdout.readline()
+            print("> "+line, end='')
+            fullout += line
+            
+        proc.stdout.close();
+        proc.wait()
+        
+        return fullout
 
 def sshCommandExec(command):
         if targetLocal:
