@@ -17,10 +17,6 @@ pip install --upgrade setuptools
 pip3 install --upgrade setuptools
 
 mkdir /opt/base
-cd /opt
-mv /tmp/base-files.tar.gz /opt
-tar xzvf base-files.tar.gz 
-
 mv /tmp/test.tar.gz /opt/base
 cd /opt/base
 tar xzvf /opt/base/test.tar.gz
