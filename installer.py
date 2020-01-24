@@ -205,10 +205,10 @@ def sshCommandExec(command):
                     channel.close()
                     break
                     
-                stdout.close()
-                stderr.close()
-
-                return stdoutStr
+        stdout.close()
+        stderr.close()
+        
+        return stdoutStr
 
 def scpFile(localfile, remotefile):
     
