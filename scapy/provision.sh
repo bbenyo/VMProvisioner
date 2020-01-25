@@ -14,12 +14,13 @@ unzip -o master.zip
 cd scapy-master
 sudo python3 setup.py install
 
-pip3 install mathplotlib
-pip3 install pyx
-pip3 install cryptography
-pip3 install sphinx
-pip3 install sphinx_rtd_theme
-pip3 install tox
+python3 -m pip install ipython
+python3 -m pip install matplotlib
+python3 -m pip install pyx
+python3 -m pip install cryptography
+python3 -m pip install sphinx
+python3 -m pip install sphinx_rtd_theme
+python3 -m pip install tox
 
 cd doc/scapy
 make html
