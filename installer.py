@@ -1,5 +1,4 @@
 #!/usr/bin/python3
-
 import os
 import subprocess
 import tarfile
@@ -128,6 +127,8 @@ def handleWorkList(worklist):
 
         if baseworklist != None:
             print("  Using custom worklist, ignoring dependencies")
+            installPackage(pname)
+            installedOne = True
         elif os.path.exists(deps):
             print("  Dependency.txt found for "+pname)
             with open(deps) as depsFile:
@@ -276,7 +277,8 @@ else:
         exit(1)
 
 installedPackages = []
-installPackage("base")
+if baseworklist == None:
+    installPackage("base")
 worklist = getPackages()
 
 while (len(worklist) > 0):
