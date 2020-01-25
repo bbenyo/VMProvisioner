@@ -13,8 +13,10 @@ sudo apt-get -y install python
 sudo apt-get -y install python3-pip
 sudo apt-get -y install python-pip
 
-pip install --upgrade setuptools
-pip3 install --upgrade setuptools
+python3 -m pip install --upgrade pip
+python -m pip install --upgrade pip
+python3 -m pip install --upgrade setuptools
+python -m pip3 install --upgrade setuptools
 
 mkdir /opt/base
 mv /tmp/test.tar.gz /opt/base
