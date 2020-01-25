@@ -1,0 +1,18 @@
+# Info about a protocol (fields)
+ls(DNS)
+ls(IP)
+
+# Protocol GUI
+explore()
+explore(scapy.layers.dhcp)
+
+# Which interface
+conf.iface
+conf.iface="eth1" or send(packet, iface="eth1")
+
+# Packet output
+print(p.summary())
+p.show()
+
+# L3RawSocket
+conf.L3socket=L3RawSocket
