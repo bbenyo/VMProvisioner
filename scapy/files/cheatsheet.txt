@@ -6,6 +6,9 @@ ls(IP)
 explore()
 explore(scapy.layers.dhcp)
 
+# Load layers
+from scapy.layers import http
+
 # Which interface
 conf.iface
 conf.iface="eth1" or send(packet, iface="eth1")
@@ -13,6 +16,45 @@ conf.iface="eth1" or send(packet, iface="eth1")
 # Packet output
 print(p.summary())
 p.show()
+raw(p)
+hexdump(p)
+
+# Advanced functions
+lsc()
+traceroute("8.8.8.8")
+arping('10.0.0.0/24')
+
+>>> sniff(session=IPSession, iface="eth0")
+>>> sniff(session=TCPSession, prn=lambda x: x.summary(), store=False)
+>>> sniff(offline="file.pcap", session=NetflowSession)
+
+# pcap files
+wrpcap("temp.cap",pkts)
+pkts = rdpcap("temp.cap")
 
 # L3RawSocket
 conf.L3socket=L3RawSocket
+conf.L3socket=L3pcapSocket
+conf.L2socket=L2ListenTcpdump
+
+# Routing
+>>> conf.route
+Network         Netmask         Gateway         Iface
+127.0.0.0       255.0.0.0       0.0.0.0         lo
+192.168.8.0     255.255.255.0   0.0.0.0         eth0
+0.0.0.0         0.0.0.0         192.168.8.1     eth0
+>>> conf.route.delt(net="0.0.0.0/0",gw="192.168.8.1")
+>>> conf.route.add(net="0.0.0.0/0",gw="192.168.8.254")
+>>> conf.route.add(host="192.168.1.1",gw="192.168.8.1")
+>>> conf.route
+Network         Netmask         Gateway         Iface
+127.0.0.0       255.0.0.0       0.0.0.0         lo
+192.168.8.0     255.255.255.0   0.0.0.0         eth0
+0.0.0.0         0.0.0.0         192.168.8.254   eth0
+192.168.1.1     255.255.255.255 192.168.8.1     eth0
+>>> conf.route.resync()
+>>> conf.route
+Network         Netmask         Gateway         Iface
+127.0.0.0       255.0.0.0       0.0.0.0         lo
+192.168.8.0     255.255.255.0   0.0.0.0         eth0
+0.0.0.0         0.0.0.0         192.168.8.1     eth0
