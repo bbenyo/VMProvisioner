@@ -3,10 +3,28 @@ Provisioner to load tools and set up a virtual machine from a base image, simple
 
 Useful for when you're adding many individual components and don't want to create ansible playbooks or salt pillars/modules for each
 
-# Each subdirectory can contain an upload.sh script, a provision.sh script, and a dependency.txt file
+## Subdirectories
+Each subdirectory contains a single project.  Each project can contain tarballs, zips, extra files, and provisioner script
+The installer will install each project if it doesn't already exist on the target host.  It checks for existance on the host by
+an md5 checksum on the provisioner script.  Therefore, you can add a version comment to the provisioner to manage versions
 
-## name.tar.gz
-tarball to scp over to /tmp.  Provision.sh should install it
+Installation first ensures that all dependent projects are installed, by looking at any dependency.txt file.  The dependency.txt file
+should contain a list of projects, one per line.
+
+Installing a project involves
+1. Copying over all tar.gz files in the project directory to /tmp
+2. Copying over all .zip files to /tmp
+3. Copying over the entire files subdirectory to /tmp as files.tar.gz, then expanding to /opt/[project name]
+4. Copy over provision.sh to /tmp
+5. Execute provision.sh on the target
+
+Each subdirectory can contain tarballs, a files subdirectory, a provision.sh script, and a dependency.txt file
+
+## *.tar.gz
+tarball to scp over to /tmp.  Provision.sh should do whatever it needs to do with it
+
+## *.zip
+zips to scp over to /tmp, provision.sh should do whatever it needs to do with it
 
 ## files subdirectory
 tar'd and scp'd over to /tmp/name-files.tar.gz
