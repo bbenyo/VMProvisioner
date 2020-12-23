@@ -18,6 +18,8 @@ python -m pip install --upgrade pip
 python3 -m pip install --upgrade setuptools
 python -m pip3 install --upgrade setuptools
 
+sudo apt-get -y install ruby
+
 mkdir /opt/base
 mv /tmp/test.tar.gz /opt/base
 cd /opt/base
